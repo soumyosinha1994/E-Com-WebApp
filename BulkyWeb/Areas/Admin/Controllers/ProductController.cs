@@ -25,11 +25,11 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public IActionResult Upsert(int? id)
         {
             //EF Projection
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-            {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            });
+            //IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            //{
+            //    Text = u.Name,
+            //    Value = u.Id.ToString()
+            //});
 
             //ViewBag.CategoryList = CategoryList;
 
@@ -37,9 +37,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
             ProductVM productVM = new()
             {
-                CategoryList = CategoryList,
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
                 Product = new Product()
             };
+
             if (id == null || id == 0)
             {
                 //create/Insert
@@ -172,6 +177,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
             List<Product> objProductList = _unitOfWork.Product.GetAll(IncludeProperty: "category").ToList();
             return Json(new { data = objProductList });
         }
+
+
         [HttpDelete]
         public IActionResult Delete(int id)
         {
