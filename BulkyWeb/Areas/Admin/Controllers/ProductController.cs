@@ -172,7 +172,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         //    return RedirectToAction("Index", "Product");
         //}
 
-        #region API CALLS
+        #region API CALLS for Data Tables using JQuery
 
         [HttpGet]
         public IActionResult GetAll()

@@ -4,7 +4,7 @@
     <h2>@TempData["success"]</h2>
 } *@
 @* <partial name="_Notification" /> *@
-<div class="card shadow border-0 mt-4">
+<div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -17,13 +17,13 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <a asp-controller="Category" asp-action="Upsert" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i>  Create New Category
                 </a>
             </div>
         </div>
 
-        <table class="table table-bordered table-striped">
+        <table id="tblData" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>
@@ -35,7 +35,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            @* <tbody>
                 @foreach (var obj in Model.OrderBy(u => u.DisplayOrder))
                 {
                     <tr>
@@ -55,8 +55,11 @@
                         </td>
                     </tr>
                 }
-            </tbody>
+            </tbody> *@
         </table>
 
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/category.js"></script>
+}

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Bulky.Models;
 
 namespace BulkyWeb
 {
@@ -23,9 +24,16 @@ namespace BulkyWeb
 
 
 
-            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
-            //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            //builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+    //        builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+    //        {
+    //            options.User.RequireUniqueEmail = true;
+    //        })
+    //.AddEntityFrameworkStores<ApplicationDbContext>()
+    //.AddDefaultTokenProviders();
 
             builder.Services.ConfigureApplicationCookie(options => {
                 options.LoginPath = $"/Identity/Account/Login";

@@ -15,12 +15,12 @@ namespace BulkyWeb.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -62,7 +62,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account.Manage
             public string Name { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -72,7 +72,8 @@ namespace BulkyWeb.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                Name=user.GetType().Name
+                Name=user.Name
+
             };
         }
 
@@ -84,6 +85,12 @@ namespace BulkyWeb.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+            Input = new InputModel
+            {
+                PhoneNumber = user.PhoneNumber,
+                Name = user.Name
+
+            };
             await LoadAsync(user);
             return Page();
         }
@@ -101,10 +108,11 @@ namespace BulkyWeb.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-
+            
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (Input.PhoneNumber != phoneNumber || user.Name!= Input.Name)
             {
+                user.Name = Input.Name;
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
