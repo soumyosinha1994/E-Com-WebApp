@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Bulky.Models;
+using Stripe;
 
 namespace BulkyWeb
 {
@@ -18,9 +19,9 @@ namespace BulkyWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
             //configure DbContext
-            builder.Services.AddDbContext<ApplicationDbContext>(options => 
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 
@@ -45,6 +46,8 @@ namespace BulkyWeb
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddScoped<IEmailSender,EmailSender>();
 
+            builder.Services.Configure<StripeSetting>(builder.Configuration.GetSection("Stripe"));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -57,6 +60,8 @@ namespace BulkyWeb
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
             app.UseRouting();
             app.UseAuthentication();
