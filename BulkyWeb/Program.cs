@@ -7,6 +7,7 @@ using Bulky.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Bulky.Models;
 using Stripe;
+using Bulky.DataAccess.DBInitializer;
 
 namespace BulkyWeb
 {
@@ -19,6 +20,8 @@ namespace BulkyWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+
+            builder.Services.AddScoped<IDBInitializer, DBInitializer>();
 
             //configure DbContext
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -80,12 +83,23 @@ namespace BulkyWeb
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
+            SeedDatabase();
             app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+            void SeedDatabase()
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDBInitializer>();
+                    dbInitializer.Initialize();
+                }
+            }
         }
+
     }
 }
