@@ -48,6 +48,15 @@ namespace BulkyWeb
 
             builder.Services.Configure<StripeSetting>(builder.Configuration.GetSection("Stripe"));
 
+            //Add Session
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -66,6 +75,7 @@ namespace BulkyWeb
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
             app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
