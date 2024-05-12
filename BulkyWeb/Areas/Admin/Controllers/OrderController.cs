@@ -133,7 +133,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             orderVM.orderDetail = _unitOfWork.orderDetail.GetAll(x => x.OrderHeaderId == orderVM.orderHeader.Id, IncludeProperty: "Product");
 
             //stripe logic
-            var domain = "https://localhost:44387/";
+            var domain = "https://localhost:7280/";
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"admin/Order/PaymentConfirmation?orderHeaderId={orderVM.orderHeader.Id}",

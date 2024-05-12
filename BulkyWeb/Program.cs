@@ -56,6 +56,10 @@ namespace BulkyWeb
                 options.Cookie.IsEssential = true;
             });
 
+            builder.Services.AddAuthentication().AddFacebook(option => {
+                option.AppId = "757630669867120";
+                option.AppSecret = "6a8b2f7abb79ad92dead970b46ec4a15";
+            });
 
             var app = builder.Build();
 

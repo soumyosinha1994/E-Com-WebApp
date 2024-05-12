@@ -122,7 +122,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 //ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
                 //ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusPending;
 
-                var domain = "https://localhost:44387/";
+                var domain = "https://localhost:7280/";
                 var options = new SessionCreateOptions
                 {
                     SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
@@ -175,6 +175,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 }
 
                 //Clear the shopping cart 
+                HttpContext.Session.Clear();
 
                 List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
                 .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
