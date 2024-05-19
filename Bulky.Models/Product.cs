@@ -45,7 +45,10 @@ namespace Bulky.Models
         [ForeignKey("CategoryId")]
         [ValidateNever]
         public Category category { get; set; }
+        //[ValidateNever]
+        //public string ImageUrl { get; set; }
         [ValidateNever]
-        public string ImageUrl { get; set; }
+        [Display(Name = "Product Images")]
+        public List<ProductImage> ProductImages { get; set; }
     }
 }

@@ -63,7 +63,10 @@ namespace BulkyWeb
                 option.AppId = "757630669867120";
                 option.AppSecret = "6a8b2f7abb79ad92dead970b46ec4a15";
             });
-
+            builder.Services.AddAuthentication().AddMicrosoftAccount(option => {
+                option.ClientId = "ec4d380d-d631-465d-b473-1e26ee706331";
+                option.ClientSecret = "qMW8Q~LlEEZST~SDxDgcEVx_45LJQF2cQ_rEKcSQ";
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -32,14 +32,14 @@ namespace BulkyWeb.Areas.Customer.Controllers
             //    HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == claim.Value).Count());
             //}
 
-            IEnumerable<Product> products=_unitOfWork.Product.GetAll(IncludeProperty: "category");
+            IEnumerable<Product> products=_unitOfWork.Product.GetAll(IncludeProperty: "category,ProductImages");
             return View(products);
         }
         public IActionResult Details(int productId)
         {
             ShoppingCart shoppingCart = new()
             {
-                Product = _unitOfWork.Product.Get(u => u.Id == productId, IncludeProperty: "category"),
+                Product = _unitOfWork.Product.Get(u => u.Id == productId, IncludeProperty: "category,ProductImages"),
                 Count = 1,
                 ProductId = productId
             };
