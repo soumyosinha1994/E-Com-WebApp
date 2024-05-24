@@ -1,0 +1,13 @@
+﻿C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ApplicationUser.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\Category.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\Company.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ErrorViewModel.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\OrderDetail.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\OrderHeader.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\Product.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ProductImage.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ShoppingCart.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ViewModels\OrderVM.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ViewModels\ProductVM.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ViewModels\RoleManagmentVM.cs
+C:\Users\asus\OneDrive\Desktop\MyWebApp\Bulky\Bulky.Models\ViewModels\ShoppingCartVM.cs

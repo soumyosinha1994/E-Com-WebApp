@@ -44,11 +44,11 @@ namespace Bulky.DataAccess.Repository
             var OrderFromDB = _context.OrderHeaders.FirstOrDefault(x => x.Id == id);
             if (!string.IsNullOrEmpty(sessionId)) 
             { 
-            OrderFromDB.SessionId= sessionId;
+            OrderFromDB!.SessionId= sessionId;
             }
             if (!string.IsNullOrEmpty(paymentIntentId))
             {
-                OrderFromDB.PaymentIntentId = paymentIntentId;
+                OrderFromDB!.PaymentIntentId = paymentIntentId;
                 OrderFromDB.PaymentDate=DateTime.Now;
             }
         }
